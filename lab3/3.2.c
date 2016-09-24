@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 
-int y, yd, cy, m, md, cm, d, n, day;
+int y, cy, m, cm, n;
 
 void checky (void)
 {
@@ -24,6 +24,7 @@ void checkn (void)
 
 int main (void)
 {
+	int yd, md, d, day;
 	char x;
 	printf("Enter year\n");
 	scanf("%d%c", &y, &x);
