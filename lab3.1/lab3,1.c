@@ -2,11 +2,10 @@
 #include <stdio.h>
 #include <math.h>
 int e;
- double x , k ;
-    double  q=1, eps;
+int x , k ;
+    double  q=1 , eps=1;
     char b;
     double y= 1 ;
-	float z=0.1 ;
 main()
 {  
 	
@@ -15,8 +14,9 @@ main()
 	printf("Enter K:\n");
 	scanf("%lf%c" , &k,&b , "\n");
 	printf("Enter Precision:\n");
-	scanf("%d%c" , &e,&b , "\n");
-	eps= pow(z,e);
+	scanf("%d%c" , &eps,&b , "\n");
+	printf("Enter number of numbers after dot:\n");
+	scanf("%d",&e);
 	
 	if(k!=0 || b!='\n')
 	{
