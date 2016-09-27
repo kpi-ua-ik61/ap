@@ -88,15 +88,13 @@ int calculations (void)
 	if ((k==1)&&(x!=0)) {y=x;}
 	if ((k==-1)&&(x==0)) 
 	{
-		printf("This root doesn\'t exist.\n"); 
-		getch();
+		printf("This root doesn\'t exist.\n");
 		return 0;
 	}
 	if ((k==-1)&&(x!=0)) {y=1/x;}
 	if ((k>1)&&(k%2==0)&&(x<0))
 	{
 		printf("This root doesn\'t exist.\n"); 
-		getch();
 		return 0;
 	}
 	if ((k>1)&&(k%2==0)&&(x==0)) {y=0;}
@@ -122,7 +120,6 @@ int calculations (void)
 	if ((k<-1)&&(abs(k)%2==0)&&(x<=0))
 	{
 		printf("This root doesn\'t exist.\n"); 
-		getch();
 		return 0;
 	}
 	if ((k<-1)&&(abs(k)%2==0)&&(x>0))
@@ -138,7 +135,6 @@ int calculations (void)
 	if ((k<-1)&&(abs(k)%2==1)&&(x==0))
 	{
 		printf("This root doesn\'t exist.\n"); 
-		getch();
 		return 0;
 	}
 	if ((k<-1)&&(abs(k)%2==1)&&(x!=0))
