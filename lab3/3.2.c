@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 
-int y, cy, m, cm, n;
+int y, cy, m, cm, n, j;
 
 void checky (void)
 {
@@ -22,54 +22,70 @@ void checkn (void)
 	if ((cm==0)&&(cy==0)) {n=2;}
 }
 
-int main (void)
+int calculations (void)
 {
 	int yd, md, d, day;
 	char x;
-	printf("Enter year\n");
-	scanf("%d%c", &y, &x);
-	if ((x!='\n')||(y<1000)||(y>9999))
-	{
-		printf("Enter only only numbers from 1000 to 9999.\n");
-		getch();
-		return 0;
-	}
-	checky();
 
-	printf("Enter month\n");
-	scanf("%d%c", &m, &x);
-	if ((x!='\n')||(m<1)||(m>12))
+	printf("\nEnter date, month and year.\n");
+
+	do
 	{
-		printf("Enter only only numbers from 1 to 12.\n");
-		getch();
-		return 0;
+		printf("\nEnter date\n");
+		scanf("%d%c", &d, &x);
+		if ((x!='\n')||(d<1)||(d>31))
+		{
+			printf("Enter only only numbers from 1 to 31.\n");
+			fflush(stdin);
+			j=0;
+		}
+		else (j=1);
 	}
+	while (j!=1);
+
+	do
+	{
+		printf("\nEnter month\n");
+		scanf("%d%c", &m, &x);
+		if ((x!='\n')||(m<1)||(m>12))
+		{
+			printf("Enter only only numbers from 1 to 12.\n");
+			fflush(stdin);
+			j=0;
+		}
+		else (j=1);
+	}
+	while (j!=1);
 	checkm();
 
-	printf("Enter date\n");
-	scanf("%d%c", &d, &x);
-	if ((x!='\n')||(d<1)||(d>31))
+	do
 	{
-		printf("Enter only only numbers from 1 to 31.\n");
-		getch();
-		return 0;
+		printf("\nEnter year\n");
+		scanf("%d%c", &y, &x);
+		if ((x!='\n')||(y<1000)||(y>9999))
+		{
+			printf("Enter only only numbers from 1000 to 9999.\n");
+			fflush(stdin);
+			j=0;
+		}
+		else (j=1);
 	}
+	while (j!=1);
+	checky();
+
 	if ((cy==1)&&(m==2)&&(d>29))
 	{
 		printf("This day doesn't exist.\n");
-		getch();
 		return 0;
 	}
 	if ((cy==0)&&(m==2)&&(d>28))
 	{
 		printf("This day doesn't exist.\n");
-		getch();
 		return 0;
 	}
 	if (((m==4)||(m==6)||(m==9)||(m==10))&&(d==31))
 	{
 		printf("This day doesn't exist.\n");
-		getch();
 		return 0;
 	}
 	checkn();
@@ -78,15 +94,42 @@ int main (void)
 	md=30.56*m;
 	day=(yd+md+d+n)%7;
 
-	if (day==0) {printf("This day is Monday\n");}
-	if (day==1) {printf("This day is Tuesday\n");}
-	if (day==2) {printf("This day is Wednesday\n");}
-	if (day==3) {printf("This day is Thursday\n");}
-	if (day==4) {printf("This day is Friday\n");}
-	if (day==5) {printf("This day is Saturday\n");}
-	if (day==6) {printf("This day is Sunday\n");}
+	if (day==0) {printf("\nThis day is Monday\n");}
+	if (day==1) {printf("\nThis day is Tuesday\n");}
+	if (day==2) {printf("\nThis day is Wednesday\n");}
+	if (day==3) {printf("\nThis day is Thursday\n");}
+	if (day==4) {printf("\nThis day is Friday\n");}
+	if (day==5) {printf("\nThis day is Saturday\n");}
+	if (day==6) {printf("\nThis day is Sunday\n");}
+}
 
-	getch();
+int main (void)
+{
+	char tmp;
+	int t;
+	int i;
+	do
+	{
+		calculations();
+		fflush(stdin);
+		do
+		{
+			printf("\nDo you want to try again? [Y/N]\n");
+			scanf("%c", &tmp);
+			t=tmp;
+			if ((t==121)||(t==89)) {i=1;}
+			if ((t==110)||(t==78)) {i=0;}
+			if ((i!=0)&&(i!=1))
+			{
+				printf("Enter Y (Yes) or N (No).\n");
+				fflush(stdin);
+				j=0;
+			}
+			else (j=1);
+		}
+		while (j!=1);
+	}
+	while (i!=0);
 
 	return 0;
 }
