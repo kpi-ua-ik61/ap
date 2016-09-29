@@ -3,7 +3,7 @@ int inputInt(int *value, char* request){
 	char term;
 
 	do{
-		printf("%s: ", request);
+		printf("%s", request);
 		scanf("%d%c", value, &term);
 
 		if ( term != '\n') {
@@ -26,7 +26,7 @@ int returnInputInt(char* request){
 	int value;
 
 	do{
-		printf("%s: ", request);
+		printf("%s", request);
 		scanf("%d%c", &value, &term);
 
 		if ( term != '\n') {
@@ -48,7 +48,7 @@ int inputFloat(float *value, char* request){
 	char term;
 
 	do{
-		printf("%s: ", request);
+		printf("%s", request);
 
 		scanf("%f%c", value, &term);
 		if ( term != '\n') {        // || &value / &value != 1
@@ -70,7 +70,7 @@ float returnInputFloat(char* request){
 	float value;
 
 	do{
-		printf("%s: ", request);
+		printf("%s", request);
 
 		scanf("%f%c", &value, &term);
 		if ( term != '\n') {        // || &value / &value != 1
