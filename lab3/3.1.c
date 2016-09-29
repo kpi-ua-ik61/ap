@@ -31,14 +31,13 @@ int calculations (void)
 	float e;
 	char c;
 
-	printf("Enter number, root and accuracy.\n");
+	printf("\nEnter number, root and accuracy.\n");
 	printf("Result will be rounded to entered accuracy.\n");
 
 	do
 	{
 		printf("\nEnter number\n");
-		scanf("%f%c", &x, &c);
-		if (c!='\n')
+		if ((scanf("%f%c", &x, &c)!=2)||(c!='\n'))
 		{
 			printf("Enter only numbers.\n");
 			fflush(stdin);
@@ -51,8 +50,7 @@ int calculations (void)
 	do
 	{
 		printf("\nEnter root\n");
-		scanf("%d%c", &k, &c);
-		if ((c!='\n')||(k==0))
+		if ((scanf("%d%c", &k, &c)!= 2)||(c!='\n')||(k==0))
 		{
 			printf("Enter only positive and negative integer numbers.\n");
 			fflush(stdin);
@@ -64,11 +62,10 @@ int calculations (void)
 
 	do
 	{
-		printf("\nEnter accuracy from 1 to 6.\n");
-		scanf("%d%c", &eo, &c);
-		if (((eo!=0)&&(eo!=1)&&(eo!=2)&&(eo!=3)&&(eo!=4)&&(eo!=5)&&(eo!=6))||(c!='\n'))
+		printf("\nEnter accuracy from 0 to 6.\n");
+		if ((scanf("%d%c", &eo, &c)!= 2)||(c!='\n')||((eo!=0)&&(eo!=1)&&(eo!=2)&&(eo!=3)&&(eo!=4)&&(eo!=5)&&(eo!=6)))
 		{
-			printf("Enter only numbers from 1 to 6.\n");
+			printf("Enter only numbers from 0 to 6.\n");
 			fflush(stdin);
 			j=0;
 		}
@@ -84,6 +81,7 @@ int calculations (void)
 	if (eo==6) {e=0.000001;}
 
 	y=1;
+
 	if ((k==1)&&(x==0)) {y=0;}
 	if ((k==1)&&(x!=0)) {y=x;}
 	if ((k==-1)&&(x==0)) 
@@ -148,29 +146,28 @@ int calculations (void)
 		y=(1/y);
 	}
 	
-	printf("Your result - %.*f\n", eo, y);
+	printf("\nYour result - %.*f\n", eo, y);
 }
 
 int main(void)
 {
 	char tmp;
-	int t;
-	int i;
+	int t, i;
 	do
 	{
 		calculations();
-		fflush(stdin);
+		tmp=0;
 		do
 		{
 			printf("\nDo you want to try again? [Y/N]\n");
-			scanf("%c", &tmp);
+			tmp=getch();
+			fflush(getch());
 			t=tmp;
 			if ((t==121)||(t==89)) {i=1;}
 			if ((t==110)||(t==78)) {i=0;}
 			if ((i!=0)&&(i!=1))
 			{
-			printf("Enter Y (Yes) or N (No).\n");
-				fflush(stdin);
+				printf("Enter Y (Yes) or N (No).\n");
 				j=0;
 			}
 			else (j=1);
@@ -180,5 +177,4 @@ int main(void)
 	while (i!=0);
 
 	return 0;
-
 }
