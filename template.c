@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "inputlib.h"
+#include "../lib/inputlib/inputlib.c"
 
 int code() {
 
