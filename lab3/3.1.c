@@ -156,25 +156,25 @@ int main(void)
 	do
 	{
 		calculations();
-		tmp=0;
 		do
 		{
+			i=0;
 			printf("\nDo you want to try again? [Y/N]\n");
 			tmp=getch();
-			fflush(getch());
 			t=tmp;
 			if ((t==121)||(t==89)) {i=1;}
-			if ((t==110)||(t==78)) {i=0;}
-			if ((i!=0)&&(i!=1))
+			if ((t==110)||(t==78)) {i=(-1);}
+			if ((i!=(-1))&&(i!=1))
 			{
 				printf("Enter Y (Yes) or N (No).\n");
+				fflush(stdin);
 				j=0;
 			}
 			else (j=1);
 		}
 		while (j!=1);
 	}
-	while (i!=0);
+	while (i!=(-1));
 
 	return 0;
 }
