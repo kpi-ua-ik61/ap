@@ -31,26 +31,30 @@ int code() {
 
 	if (d > 0){
 		float u = cbrtf(-q / 2 + sqrtf(d));
+		printf("u: %f\n", u);
+
 		float v = cbrtf(-q / 2 - sqrtf(d));
+		printf("v: %f\n\n", v);
 
 		float yone = u + v;
-		float temp1 = -1 * yone / 2;
-		float temp2 = cbrtf(3) * (u - v) / 2;
+		float xone = yone - a / 3;
+		float temp1 = -yone / 2 - a/3;
+		float temp2 = (sqrtf(3) * (u - v)) / 2;
 
-		printf("y1: %f\n", yone);
-		printf("y2: %f + i * %f\n", temp1, temp2);
-		printf("y2: %f - i * %f\n", temp1, temp2);
+		printf("x1: %f\n", xone);
+		printf("x2: %f + i * %f\n", temp1, temp2);
+		printf("x2: %f - i * %f\n", temp1, temp2);
 	}
 	else if (d == 0){
-		float yone = 3 * q / p;
-		float ytwo = -1 * 3 * p / 2 / p;
-		float ythree = ytwo;
+		float xone = 3 * q / p - a/3;
+		float xtwo = -1 * 3 * p / 2 / p - a/3;
+		float xthree = xtwo;
 
-		printf("y1: %f\n", yone);
-		printf("y2: %f\n", ytwo);
-		printf("y3: %f\n", ythree);
+		printf("x1: %f\n", xone);
+		printf("x2: %f\n", xtwo);
+		printf("x3: %f\n", xthree);
 
-		float check = pow(yone, 3) + a * pow(ytwo, 2) + b * ythree + c;
+		float check = pow(xone, 3) + a * pow(xtwo, 2) + b * xthree + c;
 		printf("\nCheck: %f", check);
 		
 	}
@@ -58,15 +62,15 @@ int code() {
 		float r = sqrtf(-1 * pow(p, 3) / 27);
 		float fi = acos(-1 * q / 2 * r);
 
-		float yone = 2 * abs(cbrtf(r)) * cos(fi / 3);
-		float ytwo = 2 * abs(cbrtf(r)) * cos((fi + 2 * M_PI) / 3);
-		float ythree = 2 * abs(cbrtf(r)) * cos((fi + 4 * M_PI) / 3);
+		float xone = 2 * abs(cbrtf(r)) * cos(fi / 3) - a/3;
+		float xtwo = 2 * abs(cbrtf(r)) * cos((fi + 2 * M_PI) / 3) - a/3;
+		float xthree = 2 * abs(cbrtf(r)) * cos((fi + 4 * M_PI) / 3) - a/3;
 
-		printf("y1: %f\n", yone);
-		printf("y2: %f\n", ytwo);
-		printf("y3: %f\n", ythree);
+		printf("x1: %f\n", xone);
+		printf("x2: %f\n", xtwo);
+		printf("x3: %f\n", xthree);
 
-		float check = pow(yone, 3) + a * pow(ytwo, 2) + b * ythree + c;
+		float check = pow(xone, 3) + a * pow(xtwo, 2) + b * xthree + c;
 		printf("\nCheck: %f", check);
 
 	}
