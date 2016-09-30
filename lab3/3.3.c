@@ -72,8 +72,7 @@ void calculations (void)
 	do
 	{
 		printf("\nCoefficient a = ");
-		scanf("%f%c", &a, &x);
-		if (x!='\n')
+		if ((scanf("%f%c", &a, &x)!=2)||(x!='\n'))
 		{
 			printf("Enter only numbers.\n");
 			fflush(stdin);
@@ -86,8 +85,7 @@ void calculations (void)
 	do
 	{
 		printf("Coefficient b = ");
-		scanf("%f%c", &b, &x);
-		if (x!='\n')
+		if ((scanf("%f%c", &b, &x)!=2)||(x!='\n'))
 		{
 			printf("Enter only numbers.\n");
 			fflush(stdin);
@@ -100,7 +98,7 @@ void calculations (void)
 	do
 	{
 		printf("Coefficient c = ");
-		scanf("%f%c", &c, &x);
+		if ((scanf("%f%c", &c, &x)!=2)||(x!='\n'))
 		if (x!='\n')
 		{
 			printf("Enter only numbers.\n");
@@ -116,6 +114,10 @@ void calculations (void)
 		x1=0;
 		x2=0;
 		x3=0;
+		printf("\nYour results:\n");
+		printf("x1 = %f\n", x1);
+		printf("x2 = %f\n", x2);
+		printf("x3 = %f\n", x3);
 	}
 
 	if ((b==((a*a)/3))&&(c==((a*a*a)/27)))
@@ -123,42 +125,49 @@ void calculations (void)
 		x1=-a/3;
 		x2=-a/3;
 		x3=-a/3;
+		printf("\nYour results:\n");
+		printf("x1 = %f\n", x1);
+		printf("x2 = %f\n", x2);
+		printf("x3 = %f\n", x3);
 	}
 
-	calcpqd();
-
-	if (d>0) 
+	else
 	{
-		calc1();
-	}
+		calcpqd();
 
-	if (d==0)
-	{
-		calc2();
-	}
+		if (d>0) 
+		{
+			calc1();
+		}
 
-	if (d<0)
-	{
-		calc3();
+		if (d==0)
+		{
+			calc2();
+		}
+
+		if (d<0)
+		{
+			calc3();
+		}
 	}
 }
 
-int main (void)
+int main(void)
 {
 	char tmp;
 	int t, i;
 	do
 	{
 		calculations();
-		fflush(stdin);
 		do
 		{
+			i=0;
 			printf("\nDo you want to try again? [Y/N]\n");
-			scanf("%c", &tmp);
+			tmp=getch();
 			t=tmp;
 			if ((t==121)||(t==89)) {i=1;}
-			if ((t==110)||(t==78)) {i=0;}
-			if ((i!=0)&&(i!=1))
+			if ((t==110)||(t==78)) {i=(-1);}
+			if ((i!=(-1))&&(i!=1))
 			{
 				printf("Enter Y (Yes) or N (No).\n");
 				fflush(stdin);
@@ -168,7 +177,7 @@ int main (void)
 		}
 		while (j!=1);
 	}
-	while (i!=0);
+	while (i!=(-1));
 
 	return 0;
 }
