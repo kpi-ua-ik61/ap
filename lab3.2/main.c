@@ -19,9 +19,7 @@ int code() {
 	int n;
 
 	date = returnInputInt("Enter date:  ");
-
 	month = returnInputInt("Enter month: ");
-
 	year = returnInputInt("Enter year:  ");
 
 	if(year > 9999 || date > 31 || month > 12){
