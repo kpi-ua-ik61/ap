@@ -77,7 +77,7 @@ int calc() {
 
 	icheck = 0;
 	do{
-		printf("   precize e = ");
+		printf(" precision e = ");
 		scanf("%d%c", &e, &term);
 		if ( term != '\n' || e < 0 || e >6 ) {
 			printf("Input error, e must be an integer number, 0 < e <= 6\n");

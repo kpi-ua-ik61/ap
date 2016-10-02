@@ -85,3 +85,35 @@ float returnInputFloat(char* request){
 
 	return value;
 }
+
+int returnEps(){
+	int inpcheck = 0;
+	char term;
+	int eps;
+
+	do{
+		printf("precision: ");
+
+		scanf("%d%c", &eps, &term);
+		if ( term != '\n' || eps < 0 || eps > 6 ) {
+			printf("Input error, e must be an integer number, 0 < e <= 6\n");
+			printf("Try again or press Ctrl+C to exit\n");
+			inpcheck = 0;
+			fflush(stdin);
+		}
+		else inpcheck = 1;
+	}
+	while (!inpcheck);
+
+	return eps;
+}
+
+float returnPrecision(int eps){
+	float precision = 1;
+
+	for (int i = 0; i < eps; i++)	{
+		precision *= 0.1;
+	}
+
+	return precision;
+}
