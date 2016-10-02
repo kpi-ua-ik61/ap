@@ -15,10 +15,12 @@ float sinTeylor(float rad){
 	do{
 		delta *= -1 * rad * rad / ((n + 1) * (n + 2));
 		sinus += delta;
-		printf("%f\n", delta);
+		//printf("%f\n", delta);
 		n+=2;
 	}
-	while(abs(delta) < precision);
+	while(abs(delta) >= precision);
+
+	return sinus;
 }
 
 float cosTeylor(float rad){
@@ -31,7 +33,9 @@ float cosTeylor(float rad){
 		cosin += cosin;
 		n+=1;
 	}
-	while(abs(delta) < precision);
+	while(abs(delta) >= precision);
+
+	return cosin;
 }
 
 int code() {
@@ -43,14 +47,16 @@ int code() {
 	int eps = returnEps();
 	
 	precision = returnPrecision(eps);
-	printf("%f\n", precision);
+	printf("precision: %f\n\n", precision);
+
+	printf(" x        rad        sinT      cosT      sin       cos\n");
 	
 	for (float x = x1; x <= x2; x += step){
 		printf("%.*f   ", eps, x);
 
 		float rad = x * M_PI / 180;
 
-		printf("%f\n", rad);
+		printf("%f   ", rad);
 
 		float sinT = sinTeylor(rad);
 		float cosT = cosTeylor(rad);
@@ -60,8 +66,8 @@ int code() {
 		printf("%.*f   ", eps, sinT);
 		printf("%.*f   ", eps, cosT);
 		printf("%.*f   ", eps, sinus);
-		printf("%.*f   ", eps, cosin);
-		printf("%.*f \n", eps, sinT - sinus);
+		printf("%.*f   \n", eps, cosin);
+		//printf("%.*f \n", eps, sinT - sinus);
 	}
 
 	return 0;
@@ -84,5 +90,3 @@ int main() {
 
 	return 0;
 }
-
-
