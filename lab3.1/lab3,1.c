@@ -22,7 +22,9 @@ void Ex(int b)
         while (b!='y' || b!='Y' || b!='n' || b!='N')
       {
          printf("press `Y` or `N`\n");
-         Ex(b);
+         b=getchar();
+    	if(b=='y'||b=='Y') main();
+    	else if (b=='n'||b=='N') exit (0);
       }
     }
 }
@@ -49,8 +51,8 @@ int main()
 	scanf("%d%c",&k,&c);
 	printf("\nEnter X:\n");
 	scanf("%lf%c",&x,&c);
-    printf("\nEnter pecision:\n");
-    scanf("%d%c",&e,&c);
+   	printf("\nEnter pecision:\n");
+   	scanf("%d%c",&e,&c);
 
     if(k!=0 && k<=32767 && k>=-32168 && c=='\n' && e>=0 && e<=16)
     {
