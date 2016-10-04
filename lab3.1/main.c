@@ -79,7 +79,7 @@ int calc() {
 	do{
 		printf(" precision e = ");
 		scanf("%d%c", &e, &term);
-		if ( term != '\n' || e < 0 || e >6 ) {
+		if ( term != '\n' || e < 0 || e > 6 ) {
 			printf("Input error, e must be an integer number, 0 < e <= 6\n");
 			printf("Try again or press Ctrl+C to exit\n");
 			icheck = 0;
@@ -156,7 +156,7 @@ int main() {
 		printf("\n");
 
 		printf("Again? [y/n]: ");
-		ex = getchar();
+		ex = getch();
 
 		printf("\n");
 
