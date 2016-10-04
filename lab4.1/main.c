@@ -53,26 +53,35 @@ int code() {
 	precision = returnPrecision(eps);
 	printf("precision: %f\n\n", precision);
 
-	printf(" x        rad        sinT     sin      sinT-sin  cosT      cos   cosT-cos\n");
+	printf("%*s   ", eps+3, "x");
+	printf("%*s   |   ", eps+3, "rad");
+	printf("%*s   ", eps+3, "sinT");
+	printf("%*s   ", eps+3, "sin");
+	printf("%*s   |   ", eps+3, "diff");
+	printf("%*s   ", eps+3, "cosT");
+	printf("%*s   ", eps+3, "cos");
+	printf("%*s\n", eps+3, "diff");
+
+	// printf(" x         rad          sinT         sin         sinT-sin         cosT         cos         cosT-cos\n");
 	
 	for (float x = x1; x <= x2; x += step){
-		printf("%.*f   ", eps, x);
+		printf("%*.*f   ", eps+3, eps, x);
 
 		float rad = x * M_PI / 180;
 
-		printf("%f   ", rad);
+		printf("%*.*f   |   ", eps+3, eps, rad);
 
 		float sinT = sinTeylor(rad);
 		float cosT = cosTeylor(rad);
 		float sinus = sin(rad);
 		float cosin = cos(rad);
 
-		printf("%.*f   ", eps, sinT);
-		printf("%.*f   ", eps, sinus);
-		printf("%.*f   ", eps, sinT - sinus);
-		printf("%.*f   ", eps, cosT);
-		printf("%.*f   ", eps, cosin);
-		printf("%.*f\n", eps, cosT - cosin);
+		printf("%*.*f   ", eps+3, eps, sinT);
+		printf("%*.*f   ", eps+3, eps, sinus);
+		printf("%*.*f   |   ", eps+3, eps, sinT - sinus);
+		printf("%*.*f   ", eps+3, eps, cosT);
+		printf("%*.*f   ", eps+3, eps, cosin);
+		printf("%*.*f\n", eps+3, eps, cosT - cosin);
 	}
 
 	return 0;
