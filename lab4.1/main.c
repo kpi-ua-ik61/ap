@@ -8,8 +8,8 @@
 float precision;
 
 float sinTeylor(float rad){
-	float delta = 1;
-	float sinus = 1;
+	float delta = rad;
+	float sinus = rad;
 	float n = 1;
 
 	do{
@@ -30,7 +30,7 @@ float cosTeylor(float rad){
 
 	do{
 		delta *= -1 * rad * rad / (2 * n * (2 * n - 1));
-		cosin += cosin;
+		cosin += delta;
 		n+=1;
 	}
 	while(abs(delta) >= precision);
@@ -43,13 +43,17 @@ int code() {
 	printf("Enter range limits, step in degrees and precise:\n");
 	float x1 = returnInputFloat("x1: ");
 	float x2 = returnInputFloat("x2: ");
+	// if(x1 > x2){
+	// 	printf("x1 > x2\n");
+	// 	return 0;
+	// }
 	float step = returnInputFloat("step: ");
 	int eps = returnEps();
 	
 	precision = returnPrecision(eps);
 	printf("precision: %f\n\n", precision);
 
-	printf(" x        rad        sinT      cosT      sin       cos\n");
+	printf(" x        rad        sinT     sin      sinT-sin  cosT      cos   cosT-cos\n");
 	
 	for (float x = x1; x <= x2; x += step){
 		printf("%.*f   ", eps, x);
@@ -64,10 +68,11 @@ int code() {
 		float cosin = cos(rad);
 
 		printf("%.*f   ", eps, sinT);
-		printf("%.*f   ", eps, cosT);
 		printf("%.*f   ", eps, sinus);
-		printf("%.*f   \n", eps, cosin);
-		//printf("%.*f \n", eps, sinT - sinus);
+		printf("%.*f   ", eps, sinT - sinus);
+		printf("%.*f   ", eps, cosT);
+		printf("%.*f   ", eps, cosin);
+		printf("%.*f\n", eps, cosT - cosin);
 	}
 
 	return 0;
