@@ -49,35 +49,42 @@ int main()
     char b;
     printf("Enter date(number):\n");
 	scanf("%d%c",&date,&c);
+  fflush(stdin);
 	printf("\nEnter month(number):\n");
 	scanf("%d%c",&month,&c);
+  fflush(stdin);
 	printf("\nEnter year(like 1959):\n");
 	scanf("%d%c",&year,&c);
-    
-    if(date>0 && month>0 && month<=12 && c=='\n' && year >=0 && year<=32767)
+  fflush(stdin);
+
+  if(date>0 && month>0 && month<=12)
+  {
+   if(month%2==0 && date<=31 && month!=2) Day(day,year,month,date);
+   else if(month%2!=0 && date<=30 && month!=2) Day(day,year,month,date);
+   else if((month==2 && date<=29 && year%100==0 && year%400==0 )||(month==2 && date<=29 && year%100!=0 && year%4==0))Day(day,year,month,date);
+   else if((month==2 && date<29 && year%100==0 && year%400!=0)||(month==2 && date<29 && year%100!=0 && year%4!=0))Day(day,year,month,date);
+   else   printf("\nIncorrect(in one month 30 or 31 day but in february 29(If a leap year) or 28)\n");
+  }
+  else printf("Incorrect(Date must be from 1 to 31,month from 1 to 12,year from 0 to 32767)");
+
+  printf("\nDo you want to contine?[press y/n]:\n");
+  b=getchar();
+  fflush(stdin);
+  if(b=='y'||b=='Y') {
+    system("cls");
+    main();}
+  else if (b=='n'||b=='N') exit (0);
+ else
+  {
+    while (b!='y' || b!='Y' || b!='n' || b!='N') 
     {
-     if((month%2==0 && month!=2 && date<=31) || (month%2!=0 && day<=30))
-    	Day(day,year,month,date);
-	 else if ((month==2 && date<=29 && year%4==0) || (month==2 && date<29 && year%4!=0))
-	 	Day(day,year,month,date);
-	 else 
-        printf("\nIncorrect(in one month 30 or 31 day but in february 29(If a leap year) or 28)\n");
+     printf("press `Y` or `N`\n");
+     b=getchar();
+     fflush(stdin);
+      if(b=='y'||b=='Y') {
+        system("cls");
+        main();}
+      else if (b=='n'||b=='N') exit (0);
     }
-    else printf("Incorrect(Date must be from 1 to 31,month from 1 to 12,year from 0 to 32767)");
-
-    printf("\nDo you want to contine?[press y/n]:\n");
-	b=getchar();
-	if(b=='y'||b=='Y') main();
-	else if (b=='n'||b=='N') exit (0);
-
-	else
-	{
-		while (b!='y' || b!='Y' || b!='n' || b!='N') 
-	  {
-		 printf("press `Y` or `N`\n");
-		 b=getchar();
-	    if(b=='y'||b=='Y') main();
-	    else if (b=='n'||b=='N') exit (0);
-	  }
-	}
+  }
 }
