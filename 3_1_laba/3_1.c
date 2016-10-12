@@ -3,18 +3,18 @@
 #include <math.h>
 
 char symbol, exitchar;
-float x, root, y=1.06, d, delt=1.0, eps, h;
+float x, root, y=1.0, delt=1.0, eps, h;
 int j, k, r;
+
 	enter_number_x()
 {
 do
 {	symbol=0;
-
 	printf ("\nEnter 'x'\n\n");
 	scanf ("%f%c", &x, &symbol);
 	if(symbol!='\n')
 	{
-		printf ("\nERROR (Enter only numbers)\n\n");
+		printf ("\nERROR Enter only numbers\n\n");
 		fflush(stdin);
 		j=0;	    	 	
 	}
@@ -23,7 +23,7 @@ do
 while (j!=1);
 }
 
-	enter_number_k()
+	enter_root_k()
 {
 do
 {	symbol=0;
@@ -32,7 +32,7 @@ do
 	scanf ("%d%c", &k, &symbol);
 	if(symbol!='\n')
 	{
-		printf ("\nERROR (Enter only numbers)\n\n");
+		printf ("\nERROR Enter only integer numbers\n");
 		fflush(stdin);
 		j=0;	    	 	
 	}
@@ -46,87 +46,103 @@ while (j!=1);
 do
 {	symbol=0;
 
-	printf ("\nEnter 'eps' from 1 to 45\n\n");
-	scanf ("%g%c", &eps, &symbol);
-	if(symbol!='\n')
+	printf ("\nEnter precision to solve from 1 to 8\n\n");
+	scanf ("%f%c", &eps, &symbol);
+	if( (symbol!='\n')||(eps<1)||(eps>8) )
 	{
-		printf ("\nERROR Enter only numbers\n\n");
+		printf ("\nERROR Enter only integer numbers from 1 to 8\n\n");
 		fflush(stdin);
 		j=0;	    	 	
 	}		
 	else (j=1);	
-	
-
-	if( (eps<1)||(eps>45) )	
-	{
-	
-		printf ("\nERROR (Enter eps from 1 to 45)\n\n");
-		fflush(stdin);
-		j=0;
-	}
-		
 }
 while (j!=1);
 }
 
-	calculate_eps()
-{	 
-	r = eps;
-	eps= 1/(pow(10,eps));
-		
-}
-
-	calculate_delt()
+	calculation()
 {
-	//h=k-1;
-	delt=(x/pow(y,abs(h))-y)/abs(k);
-	//delt=d;
+	{	 
+		r = eps;
+		eps = 1/(pow(10,eps));
+	}
+	if ( k==0 ) 
+	{	
+		printf("\nThis root doesn\'t exist. (root=1/0)\n");
+		return 0;
+	}
+	if ( (k!=-1)&&(x==0) ) {y=0;}
+	if ( (k==1)&&(x!=0) ) {y=x;}	
+	if ( (k==-1)&&(x==0) ) 
+	{
+		printf("This root doesn\'t exist. (y=1/0)\n");
+		return 0;
+	}	
+	if ( (k==-1)&&(x!=0) ) {y=1/x;}		
+	if ( (k>1)&&(k%2==0)&&(x<0) )
+	{
+		printf("This root doesn\'t exist. (y=i)\n"); 
+		return 0;
+	}	
+	if ( (k>1)&&(k%2==0)&&(x>0) )
+	{
+		do
+		{	h=k-1;
+			delt=(x/pow(y,abs(h))-y)/abs(k);
+			y=y+delt;
+		}
+		while (fabs(delt)>=eps);
+	}
+	if ( (k>1)&&(k%2==1) )
+	{
+		do
+		{	h=k-1;
+			delt=(x/pow(y,abs(h))-y)/abs(k);
+			y=y+delt;
+		}
+		while (fabs(delt)>=eps);
+	}	
+	if ( (k<-1)&&(abs(k)%2==1)&&(x==0) )
+	{
+		printf("This root doesn\'t exist. (y=1/0)\n"); 
+		return 0;
+	}	
+	if ( (k<-1)&&(abs(k)%2==0)&&(x>0) )
+	{
+		do
+		{	h=1-k;
+			delt=((x*pow(y,h))-y)/k;
+			y=y+delt;
+		}
+		while (fabs(delt)>=eps);
+	}
+	if ((k<-1)&&(abs(k)%2==1)&&(x==0))
+	{
+		printf("This root doesn\'t exist. (y=1/0)\n"); 
+		return 0;
+	}
+	if ((k<-1)&&(abs(k)%2==1)&&(x!=0))
+	{
+			do
+		{	h=1-k;
+			delt=((x*pow(y,h))-y)/k;
+			y=y+delt;
+		}
+		while (fabs(delt)>=eps);
+	}
+	printf ("\ny=%.*f\n",r, y);
 }
-
-	calculate_y()
-{
-	y=y+delt;
-}
-
 
 int main ()
 {	
 do{
-	
-	enter_number_x();
-	
-	enter_number_k();
-	
-	enter_eps();
-	
-	calculate_eps();
-	
-	h=k-1;
-		
-	do
-	{	
-		calculate_delt();
-		calculate_y();
-		
-	}
-	while (fabs(delt)>=eps );
-	
-	printf ("\nx=%f\n\n", x);
-			
-	printf ("k=%d\n\n", k);
-		
-	printf ("eps=%d\n\n", r);
-	
-	printf ("new eps = %.*f\n\n", r,eps);
-	
-	printf ("y=%.*f\n\n",r, y);
-	
-	printf ("delt=%f\n\n", delt);
-	
-	printf ("\nEnter y + ENTER to continue\n");
-	
-	printf ("\nEnter n + ENTER twice to continue\n\n");
-	
+	system("cls");	
+	printf ("Solve y=x^(1/k)\n");
+	enter_number_x();	
+	enter_root_k();	
+	enter_eps();	
+	calculation();		
+	printf ("\nEnter y + ENTER to continue\n");	
+	printf ("\nEnter n + ENTER twice to continue\n\n");	
 	exitchar = getchar();
 }
 while ( (exitchar == 'y')||(exitchar == 'Y') );
