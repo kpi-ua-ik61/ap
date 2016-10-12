@@ -139,7 +139,8 @@ int main()
 {
 do
 {
-	system("cls");	
+	system("cls");
+	printf ("\nWrite down day-month-year to know the weekday\n");	
 	enter_day();	
 	enter_month();	
 	enter_year();	
