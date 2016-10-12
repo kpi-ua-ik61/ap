@@ -5,30 +5,96 @@
 
 #include "../lib/inputlib/inputlib.c"
 
-int code() {
-
-	int n = returnInputInt("Enter quantity of numbers: ");
-
-	float array[n];
-
-	for(int i = 0; i < n; i++){
-		array[i] = returnInputFloat("Enter array" );
-	}
-
-	// for (int i = 0; i < sizeof(array)/sizeof(int); i++)
-	// {
-	// 	printf("%f ", array[i]);
-	// }
-
-	for (int i = 1; i <= n-1; i++){
-		for (int j = 1; i <= n-i; j++){
-			if (array[j-1] > array[j]){
-				
+void sortup(float *ar, int num){ 
+	float t;
+	for(int a = 0; a < num-1; a++){
+		for(int b = a+1; b < num; b++){
+			if(ar[a] > ar[b]){ 
+				t = ar[a];
+				ar[a] = ar[b];
+				ar[b] = t;
 			}
 		}
 	}
+}
 
-	return 0;
+void sortdown(float *ar, int num){ 
+	float t;
+	for(int a = 0; a < num-1; a++){
+		for(int b = a+1; b < num; b++){
+			if(ar[a] < ar[b]){ 
+				t = ar[a];
+				ar[a] = ar[b];
+				ar[b] = t;
+			}
+		}
+	}
+}
+
+int code() {
+	printf("Use random generator [Y/N]: ");
+	char t = getch();
+	printf("\n");
+	
+	if(t == 'y'){
+		int n = rand() % 10;
+		n+=2;
+		float array[n];
+
+		for(int i = 0; i < n; i++){
+			array[i] = randFloat();
+			printf("%f ", array[i]);
+		}
+
+		printf("\nAscending:\n");
+		sortup(array, n);
+
+		for (int i = 0; i < sizeof(array)/sizeof(float); i++){
+			printf("%g\n", array[i]);
+		}
+
+		printf("\n\nDescending:\n");
+		sortdown(array, n);
+
+		for (int i = 0; i < sizeof(array)/sizeof(float); i++){
+			printf("%g\n", array[i]);
+		}
+
+		return 0;
+	}
+	else{
+		int n = returnInputInt("Enter quantity of numbers: ");
+
+		float array[n];
+
+		for(int i = 0; i < n; i++){
+			char buf[100];
+			sprintf(buf, "Enter array value #%d: ", i+1);
+			//printf("Enter array value #%d: ", i);
+			array[i] = returnInputFloat(buf);
+		}
+
+		printf("\nAscending:\n");
+		sortup(array, n);
+
+		for (int i = 0; i < sizeof(array)/sizeof(float); i++){
+			printf("%g\n", array[i]);
+		}
+
+		printf("\n\nDescending:\n");
+		sortdown(array, n);
+
+		for (int i = 0; i < sizeof(array)/sizeof(float); i++){
+			printf("%g\n", array[i]);
+		}
+
+		return 0;
+
+	}
+
+	// for (int i = 0; i < sizeof(array)/sizeof(int); i++){
+	// 	printf("%f ", array[i]);
+	// }
 }
 
 int main() {
@@ -48,5 +114,3 @@ int main() {
 
 	return 0;
 }
-
-
