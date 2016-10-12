@@ -23,11 +23,18 @@ int code() {
 	year = returnInputInt("Enter year:  ");
 
 	if(year > 9999 || date > 31 || month > 12){
-		printf("error");
+		printf("Entered data is not valid");
 	}
 
-	if((year%100 != 0 && year%4 == 0) || (year%100 == 0 && year%400 == 0)) vysokosn = 1;
+	if((year%100 != 0 && year%4 == 0) || (year%400 == 0)) vysokosn = 1;
 	else vysokosn = 0;
+
+	// printf("%d\n", vysokosn);
+
+	if(!vysokosn && date > 28 && month == 2){
+		printf("Such day does not excist\n");
+		return 0;
+	}
 
 	if (month > 2) n = 0;
 	else if (month <= 2 && vysokosn) n = 1;
