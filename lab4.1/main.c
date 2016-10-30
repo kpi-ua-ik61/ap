@@ -3,7 +3,7 @@
 #include <conio.h>
 #include <math.h>
 
-#include "../lib/inputlib/inputlib.c"
+#include "../lib/inputlib.h"
 
 float precision;
 
@@ -59,20 +59,22 @@ int code() {
 	printf("%*s   |   ", eps+6, "x");
 	printf("%*s   |   ", eps+4, "rad");
 	printf("%*s   ", eps+3, "sinT");
-	printf("%*s   ", eps+3, "sin");
-	printf("%*s   |   ", eps+3, "diff");
+	printf("%*s   ", 6+3, "sin");
+	printf("%*s   |   ", 6+3, "diff");
 	printf("%*s   ", eps+3, "cosT");
-	printf("%*s   ", eps+3, "cos");
-	printf("%*s\n", eps+3, "diff");
+	printf("%*s   ", 6+3, "cos");
+	printf("%*s\n", 6+3, "diff");
 
 	// printf(" x         rad          sinT         sin         sinT-sin         cosT         cos         cosT-cos\n");
 	
 	if(step > 0) {
 		for (float x = x1; x <= x2; x += step){
-			printf("%*.*f   |   ", eps+6, eps, x);
+			printf("%*.*f   |   ", eps+6, 6, x);
 
 			float rad = x * M_PI / 180;
-			printf("%*.*f   |   ", eps+4, eps, rad);
+			printf("%*.*f   |   ", eps+4, 6, rad);
+
+			// printf("  %f\n", x);
 
 			float sinT = sinTeylor(rad);
 			float cosT = cosTeylor(rad);
@@ -80,19 +82,19 @@ int code() {
 			float cosin = cos(rad);
 
 			printf("%*.*f   ", eps+3, eps, sinT);
-			printf("%*.*f   ", eps+3, eps, sinus);
-			printf("%*.*f   |   ", eps+3, eps, sinT - sinus);
+			printf("%*.*f   ", 6+3, 6, sinus);
+			printf("%*.*f   |   ", 6+3, 6, sinT - sinus);
 			printf("%*.*f   ", eps+3, eps, cosT);
-			printf("%*.*f   ", eps+3, eps, cosin);
-			printf("%*.*f\n", eps+3, eps, cosT - cosin);
+			printf("%*.*f   ", 6+3, 6, cosin);
+			printf("%*.*f\n", 6+3, 6, cosT - cosin);
 		}
 	}
 	else{
 		for (float x = x1; x >= x2; x += step){
-			printf("%*.*f   |   ", eps+6, eps, x);
+			printf("%*.*f   |   ", eps+6, 6, x);
 
 			float rad = x * M_PI / 180;
-			printf("%*.*f   |   ", eps+4, eps, rad);
+			printf("%*.*f   |   ", eps+4, 6, rad);
 
 			float sinT = sinTeylor(rad);
 			float cosT = cosTeylor(rad);
@@ -100,11 +102,11 @@ int code() {
 			float cosin = cos(rad);
 
 			printf("%*.*f   ", eps+3, eps, sinT);
-			printf("%*.*f   ", eps+3, eps, sinus);
-			printf("%*.*f   |   ", eps+3, eps, sinT - sinus);
+			printf("%*.*f   ", 6+3, 6, sinus);
+			printf("%*.*f   |   ", 6+3, 6, sinT - sinus);
 			printf("%*.*f   ", eps+3, eps, cosT);
-			printf("%*.*f   ", eps+3, eps, cosin);
-			printf("%*.*f\n", eps+3, eps, cosT - cosin);
+			printf("%*.*f   ", 6+3, 6, cosin);
+			printf("%*.*f\n", 6+3, 6, cosT - cosin);
 		}
 	}
 

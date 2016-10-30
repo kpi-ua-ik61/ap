@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <conio.h>
 
-#include "../lib/inputlib/inputlib.c"
+#include "../lib/inputlib.h"
 
 
 int date;
@@ -32,7 +32,12 @@ int code() {
 	// printf("%d\n", vysokosn);
 
 	if(!vysokosn && date > 28 && month == 2){
-		printf("Such day does not excist\n");
+		printf("Such day does not exist\n");
+		return 0;
+	}
+
+	if (month == 4 || month == 6 || month == 9 || month == 11 && day > 30) {
+		printf("Such day does not exist\n");
 		return 0;
 	}
 
@@ -67,7 +72,7 @@ int main() {
 
 		printf("\n");
 		printf("Again? [y/n]: ");
-		exitchar = getchar();
+		exitchar = getch();
 
 		printf("\n");
 	}

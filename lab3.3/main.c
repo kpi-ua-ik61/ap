@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <conio.h>
 
-#include "../lib/inputlib/inputlib.c"
+#include "../lib/inputlib.h"
 
 float a;
 float b;
@@ -85,7 +86,7 @@ int main() {
 
 		printf("\n");
 		printf("Again? [y/n]: ");
-		exitchar = getchar();
+		exitchar = getch();
 
 		printf("\n");
 	}

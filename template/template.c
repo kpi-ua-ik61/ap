@@ -3,8 +3,8 @@
 #include <conio.h>
 #include <math.h>
 
-#include "../lib/inputlib.c"
-#include "../lib/rand.c"
+#include "../lib/inputlib.h"
+#include "../lib/rand.h"
 
 int code() {
 

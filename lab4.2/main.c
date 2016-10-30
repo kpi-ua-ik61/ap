@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-#include <math.h>
 
-#include "../lib/inputlib/inputlib.c"
+#include "../lib/rand.h"
+#include "../lib/inputlib.h"
 
 void sortup(float *ar, int num){ 
 	float t;
@@ -34,19 +34,19 @@ void sortdown(float *ar, int num){
 int code() {
 	printf("Use random generator [Y/N]: ");
 	char t = getch();
-	printf("\n");
+	printf("\n\n");
 	
 	if(t == 'y'){
-		int n = rand() % 10;
+		int n = randInt(2,10);
 		n+=2;
 		float array[n];
 
 		for(int i = 0; i < n; i++){
 			array[i] = randFloat();
-			printf("%f ", array[i]);
+			printf("%f\n", array[i]);
 		}
 
-		printf("\nAscending:\n");
+		printf("\n\nAscending:\n");
 		sortup(array, n);
 
 		for (int i = 0; i < sizeof(array)/sizeof(float); i++){
@@ -63,7 +63,11 @@ int code() {
 		return 0;
 	}
 	else{
-		int n = returnInputInt("Enter quantity of numbers: ");
+		long int n = returnInputInt("Enter quantity of numbers: ");
+		if(n < 2){
+			printf("Error, n must be more than 1\n");
+			return 0;
+		}
 
 		float array[n];
 
