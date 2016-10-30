@@ -1,6 +1,9 @@
 #include <time.h>
 
-srand(time(0));
+int randInit(){
+	srand(time(0));
+	return 0;
+}
 
 int randInt(int min, int max){
 	int num = min + (rand() % max+1-min);

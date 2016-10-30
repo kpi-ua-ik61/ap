@@ -105,6 +105,8 @@ int main() {
 
 	char exitchar;
 
+	randInit();
+
 	do {
 		code();
 
