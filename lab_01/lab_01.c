@@ -1,42 +1,47 @@
-#include <stdio.h>;
-#include <curses.h>;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        _____    ______     */
+/*   lab_01.c                                            (____ \  |  ___ \    */
+/*                                                        _   \ \ | | _ | |   */
+/*   By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |   */
+/*                                                       | |__/ / | || || |   */
+/*   Created: 2016/10/31 13:35:05 by dmaznytskyi         |_____/  |_||_||_|   */
+/*   Updated: 2016/10/31 20:05:28 by dmaznytskyi                              */
+/*                                                                            */
+/* ************************************************************************** */
 
-int roman(int,int,char);
+#include <unistd.h>
+#include <stdlib.h>
 
-main() {
-	int a;
-	printf("enter number\n");
-	scanf("%d",&a);
-	a = roman(a,1000,'M');
-	a = roman(a,500,'D');
-	a = roman(a,100,'C');
-	a = roman(a,50,'L');
-	a = roman(a,10,'X');
-	a = roman(a,5,'V');
-	a = roman(a,1,'I');
-	getch();
-	return 0;
+int	ft_atoi(char *str);
+int	roman(int a, int b, char c);
+
+int	main(void)
+{
+	char	*str;
+	int		a;
+
+	a = 0;
+	str = malloc(sizeof(int));
+	write(1, "Enter number\n", 13);
+	read(0, str, 4096);
+	a = ft_atoi(str);
+	a = roman(a, 1000, 'M');
+	a = roman(a, 500, 'D');
+	a = roman(a, 100, 'C');
+	a = roman(a, 50, 'L');
+	a = roman(a, 10, 'X');
+	a = roman(a, 5, 'V');
+	a = roman(a, 1, 'I');
+	return (0);
 }
 
-roman(int i,int j,char c){
-	while (i>=j) {
-		putchar(c);
-		i=i-j;
+int	roman(int a, int b, char c)
+{
+	while (a >= b)
+	{
+		write(1, &c, 1);
+		a = a - b;
 	}
-	return i;
+	return a;
 }
-
-//	пересобрать кучу "а" как массив (двумерный)
-//
-//	int array_num[7] = {1000,500,100,50,10,5,1};
-//	char array_char[7] = {'M','D','C','L','X','V','I'};
-//	int a;
-//	int buff;
-//	scanf("%d",&a);
-//	while a>0 do {
-//		int i = 0;
-//		while a>array_num[i] do {
-//			a = a - array_num[i];
-//		}
-//	i++;
-//	}
