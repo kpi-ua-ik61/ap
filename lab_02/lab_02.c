@@ -1,83 +1,93 @@
-#include <stdio.h>
-#include <curses.h>
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        _____    ______     */
+/*   lab_02.c                                            (____ \  |  ___ \    */
+/*                                                        _   \ \ | | _ | |   */
+/*   By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |   */
+/*                                                       | |__/ / | || || |   */
+/*   Created: 2016/11/01 03:41:30 by dmaznytskyi         |_____/  |_||_||_|   */
+/*   Updated: 2016/11/01 19:21:29 by dmaznytskyi                              */
+/*                                                                            */
+/* ************************************************************************** */
 
-float side_a;
-float side_b;
-float side_c;
+#include "header.h"
 
-char forbiden[] = "abcdefghijklmnopqrstuvwxyzйцукенгшщзхъфывапролджэячсмитьбю!@#$%%^&*()_+-=\\|'\"/,{}[]";
-char input_buffer[100];
+float	g_a;
+float	g_b;
+float	g_c;
 
-float area();
-float perimetr();
-float pperimetr();
-void heights();
-void bisektrisi();
-void mediani();
-void input_promt_checker();
+char	g_forbiden[] = "abcdefghijklmnopqrstuvwxyzйцукенгшщзхъфывапролджэячсмитьбю!@#$%%^&*()_+-=\\|'\"/,{}[]";
+char	input_buffer[100];
 
-
-int main(){
-	input_promt_checker();
-	printf("Площадь равна %.3f еденицам\n", area());
-	printf("\nПериметр равен %.3f еденицам\n", perimetr());
-	heights();
-	bisektrisi();
-	mediani();
-	getch();
-	return 0;
+int		main(void)
+{
+	input_provider();
+	input_checker(g_a, g_b, g_c);
+	printf("Площа дорівнює %.3f квадратних одиниць.\n", area(g_a, g_b, g_c));
+	printf("\nПериметр дорівнює %.3f одиниць.\n", per(g_a, g_b, g_c));
+	heights(g_a, g_b, g_c, area(g_a, g_b, g_c), 0);
+	bisektrisi(g_a, g_b, g_c, pper(per(g_a, g_b, g_c)), 0);
+	mediani(g_a, g_b, g_c, 0);
+	return (0);
 }
 
 //площа
-float area(){
-	return sqrt(pperimetr()*(pperimetr()-side_a)*(pperimetr()-side_b)*(pperimetr()-side_c));
+float	area(float a, float b, float c)
+{
+	float pp;
+
+	pp = pper(per(a, b, c));
+	return sqrt(pp * (pp - a) * (pp - b) * (pp - c));
 }	
 //периметр
-float perimetr(){
-	return (side_a + side_b + side_c);
-}
-//высоты
-void heights(){
-	printf("\nВысота, проведённая к первой стороне равна %.3f еденицам.\nВысота, проведённая ко второй стороне равна %.3f еденицам.\nВысота, проведённая к третьей стороне равна %.3f еденицам.\n", (2*area()/side_a),(2*area()/side_b),(2*area()/side_c));
-}
-//бисектрисы
-void bisektrisi(){
-	printf("\nБисектриса, проведённая к первой стороне равна %.3f еденицам.\nБисектриса, проведённая ко второй стороне равна %.3f еденицам.\nБисектриса, проведённая к третьей стороне равна %.3f еденицам.\n", ( (2/(side_b+side_c))*sqrt(side_b*side_c*pperimetr()*(pperimetr()-side_a)) ),( (2/(side_a+side_c))*sqrt(side_a*side_c*pperimetr()*(pperimetr()-side_b)) ),( (2/(side_a+side_b))*sqrt(side_a*side_b*pperimetr()*(pperimetr()-side_c)) ) );
-}
-//медианы
-void mediani(){
-	printf("\nМедиана проведённая к первой стороне равна %.3f еденицам.\nМедиана проведённая ко второй стороне равна %.3f еденицам.\nМедиана проведённая к третьей стороне равна %.3f еденицам.\n",(sqrt(2*side_b*side_b+2*side_c*side_c-side_a*side_a)/2),(sqrt(2*side_a*side_a+2*side_c*side_c-side_b*side_b)/2),(sqrt(2*side_a*side_a+2*side_b*side_b-side_c*side_c)/2));
+float	per(float a, float b, float c)
+{
+	return (a + b + c);
 }
 //воспомогательный полупериметр
-float pperimetr(){
-	return perimetr()/2;
+float	pper(float per)
+{
+	return (per / 2);
 }
 //ввод и его проверка
-void input_promt_checker(void){
-	while (true){
-		printf("Введите стороны треугольника (они должны быть больше нуля!)\n");	
-		for(int i =0; i<3; i++){
-			printf("Введите %d сторону и нажмите enter: ",(i+1));
-			scanf("%s", &input_buffer);
-			if (strpbrk(input_buffer, forbiden) != NULL){
-				printf("\nВы ввели текст! Надо ввести число!\n");
+void	input_provider(void)
+{
+	int	flag;
+
+	flag = 0;
+	while (true)
+	{
+		printf("Введіть сторони трикутника(вони повинні бути більше нуля!)\n");	
+		for (int i = 0; i < 3; i++)
+		{
+			printf("Введіть %d сторону й натисніть enter: ", (i + 1));
+			scanf("%s", input_buffer);
+			if (strpbrk(input_buffer, g_forbiden) != NULL)
+			{
+				errorer(3);
 				break;
-			} else {
-				if (i==0) side_a = atof(input_buffer);
-				if (i==1) side_b = atof(input_buffer);
-				if (i==2) side_c = atof(input_buffer);
+			}
+			else
+			{
+				if (i==0) g_a = atof(input_buffer);
+				if (i==1) g_b = atof(input_buffer);
+				if (i==2) g_c = atof(input_buffer);
 			}
 		}
-		if ((side_a>0)&&(side_b>0)&&(side_c>0)) {
-			if (((side_a+side_b)>side_c)&&((side_b+side_c)>side_a)&&((side_c+side_a)>side_b)){
+		flag = input_checker(g_a, g_b, g_c);
+		if (flag != -1)
+			if (flag != 1)
 				break;
-			} else { 
-				printf("Треугольник со сторонами %.3f, %.3f и %.3f НЕ СУЩЕСТВУЕТ!\nПопробуйте ввести правильные данные!\n\n",side_a,side_b,side_c);
+			else
+			{
+				errorer(1);
+				errorer(4);
 			}
-		} else printf("Введённые стороны треугольнка не могут быть меньше или равны нулю.\nПопробуйте ввести правильные данные!\n\n");
+		else
+		{
+			errorer(2);
+			errorer(4);
+		}
 	}
-	puts("\nВведённые стороны верны. Начинаю вычисление...\n");
+	printf("\nВведені сторони вірні. Виконую розрахунки...\n");
 }
