@@ -6,15 +6,11 @@
 /*   By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |   */
 /*                                                       | |__/ / | || || |   */
 /*   Created: 2016/10/31 13:35:05 by dmaznytskyi         |_____/  |_||_||_|   */
-/*   Updated: 2016/10/31 20:05:28 by dmaznytskyi                              */
+/*   Updated: 2016/11/01 03:53:19 by dmaznytskyi                              */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-
-int	ft_atoi(char *str);
-int	roman(int a, int b, char c);
+#include "header.h"
 
 int	main(void)
 {

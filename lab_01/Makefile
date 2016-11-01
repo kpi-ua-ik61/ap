@@ -6,7 +6,7 @@
 #    By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |    #
 #                                                        | |__/ / | || || |    #
 #    Created: 2016/11/01 01:24:39 by dmaznytskyi         |_____/  |_||_||_|    #
-#    Updated: 2016/11/01 01:26:13 by dmaznytskyi                               #
+#    Updated: 2016/11/01 03:56:54 by dmaznytskyi                               #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,12 @@ SRCS = lab_01.c ft_atoi.c
 
 BINS = $(SRCS:.c=.o)
 
+HEADER = -I header.h
+
 all: $(NAME)
 
 $(NAME): $(BINS)
-	gcc -o $(NAME) $(BINS)
+	gcc -o $(NAME) $(BINS) $(HEADER)
 
 %.o: %.c
 	gcc $(FLAGS) -c -o $@ $<
