@@ -15,4 +15,4 @@ $ ./lab_01
 Preferable to compile and run under UNIX systems
 
 To compile under other OS include 
-#### lab_01.c and #### ft_atoi.c
+#### lab_01.c ft_atoi.c
