@@ -121,8 +121,9 @@ while (j==0);
 	if ( month > 2 ) {n=0;}
 	else if ((month <= 2)&&(lyear == 1)) {n=1;}
 	else if ((month <= 2)&&(lyear == 0)) {n=2;}	
-	//printf("\nn=%d\n", n);	
-	date = (long) (365.25*year + 30.56*month + day + n)%7;	
+	printf("\nn=%d\n", n);	
+	date = ((long)	(365.25*year) + (long)	(30.56*month) + day + n)%7;
+	printf("\ndate=%d\n", date);	
 	switch(date)
 		{
 		    case 0:printf("\nMonday.\n");break;
