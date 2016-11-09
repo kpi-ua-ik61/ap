@@ -11,11 +11,11 @@ int j;
 {
 do
 {	symbol=0;
-	printf ("Enter 'a'\n\n");
+	printf ("Enter 'a' from -100 to 100\n\n");
 	scanf ("%f%c", &a, &symbol);
-	if(symbol!='\n')
+	if( (symbol!='\n')||(a<-100)||(a>100) )
 	{
-		printf ("\nERROR (Enter only numbers)\n\n");
+		printf ("\nERROR (Enter only numbers from -100 to 100)\n\n");
 		fflush(stdin);
 		j=0;	    	 	
 	}
@@ -28,11 +28,11 @@ while (j==0);
 {
 do
 {	symbol=0;
-	printf ("\nEnter 'b'\n\n");
+	printf ("\nEnter 'b' from -100 to 100\n\n");
 	scanf ("%f%c", &b, &symbol);
-	if(symbol!='\n')
+	if( (symbol!='\n')||(b<-100)||(b>100) )
 	{
-		printf ("\nERROR (Enter only numbers)\n\n");
+		printf ("\nERROR (Enter only numbers from -100 to 100)\n\n");
 		fflush(stdin);
 		j=0;	    	 	
 	}
@@ -45,11 +45,11 @@ while (j==0);
 {
 do
 {	symbol=0;
-	printf ("\nEnter 'c'\n\n");
+	printf ("\nEnter 'c' from -100 to 100\n\n");
 	scanf ("%f%c", &c, &symbol);
-	if(symbol!='\n')
+	if( (symbol!='\n')||(c<-100)||(c>100) )
 	{
-		printf ("\nERROR (Enter only numbers)\n\n");
+		printf ("\nERROR (Enter only numbers from -100 to 100)\n\n");
 		fflush(stdin);
 		j=0;	    	 	
 	}
@@ -78,6 +78,7 @@ while (j==0);
 	if( d>0 )
 	{	
 		float u, v;
+		printf("d>0\n\n");
 		u=cbrtf((-q/2)+sqrtf(d));
 		v=cbrtf((-q/2)-sqrtf(d));
 		z1=u+v;
@@ -96,6 +97,7 @@ while (j==0);
 {
 	if( d==0 )
 	{	
+		printf("d=0\n\n");
 		z1=3*q/p;
 		z2=-(3*q)/(2*p);
 		z3=z2;		
@@ -110,6 +112,7 @@ while (j==0);
 	if( d<0 )
 	{
 		float r, f;
+		printf("d<0\n\n");
 		r=sqrtf((-p*p*p)/27);
 		f=acos(-q/(2*r));
 		z1=2*fabs(cbrtf(r))*cos(f/3);
@@ -138,11 +141,12 @@ while (j==0);
 {
 	if ( (b==((a*a)/3)) && (c==((a*a*a)/27)) )
 	{
-		x1=-a/3;
+		x1=-1*(a/3);
 		x2=0;
 		x3=0;
 		y2=0;
 		y3=0;
+		printf("fferfe\n\n");
 	} 
 }
 
