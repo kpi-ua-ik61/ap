@@ -6,7 +6,7 @@
 /*   By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |   */
 /*                                                       | |__/ / | || || |   */
 /*   Created: 2016/11/06 16:09:21 by dmaznytskyi         |_____/  |_||_||_|   */
-/*   Updated: 2016/11/14 19:15:39 by dmaznytskyi                              */
+/*   Updated: 2016/11/15 00:07:52 by dmaznytskyi                              */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,6 @@ int		main(void)
 				error(4);
 		}
 	}
-}
-
-void zadanie2()
-{
-	printf("Подпрограмма выполнена!\n\n");
 }
 
 void zadanie3()

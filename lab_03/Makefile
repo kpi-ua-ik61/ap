@@ -6,7 +6,7 @@
 #    By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |    #
 #                                                        | |__/ / | || || |    #
 #    Created: 2016/11/01 01:24:39 by dmaznytskyi         |_____/  |_||_||_|    #
-#    Updated: 2016/11/06 16:48:42 by dmaznytskyi                               #
+#    Updated: 2016/11/16 13:07:03 by dmaznytskyi                               #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = lab_03
 
 FLAGS = -Wall -Wextra -Werror -O3
 
-SRCS =	lab_03.c	input_checker.c	error.c func.c zadanie1.c\
-	#	zadanie2.c	zadanie3.c		
+SRCS =	lab_03.c	error.c		func.c		ft_atoi.c\
+		zadanie1.c	zadanie2.c#	zadanie3.c		
 
 HEADER = -I header.h
 

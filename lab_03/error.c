@@ -6,7 +6,7 @@
 /*   By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |   */
 /*                                                       | |__/ / | || || |   */
 /*   Created: 2016/11/03 02:30:17 by dmaznytskyi         |_____/  |_||_||_|   */
-/*   Updated: 2016/11/14 19:15:34 by dmaznytskyi                              */
+/*   Updated: 2016/11/15 00:07:49 by dmaznytskyi                              */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 // \e[32m\e[1m - green	color output
 // \e[31m\e[1m - red	color output
 // \e[0m       - reset	color output
+
+// 1 - 9 : input/output errors
+// 10 - 19 : errors for the first task
+// 20 - 29 : errors for the second task
+// 30 - 39 : errors for the third task
 
 void	error(int code)
 {

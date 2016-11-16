@@ -6,7 +6,7 @@
 /*   By: dmaznytskyi <dmaznytskyi@gmail.com>             | |   | || || || |   */
 /*                                                       | |__/ / | || || |   */
 /*   Created: 2016/11/01 03:49:51 by dmaznytskyi         |_____/  |_||_||_|   */
-/*   Updated: 2016/11/14 19:15:35 by dmaznytskyi                              */
+/*   Updated: 2016/11/15 00:07:54 by dmaznytskyi                              */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ float	powerof(float number, int powerto);
 void	exponent(int k, float y, float *yk);
 void	root(int k, float *y, float *x, float *yk, float *d);
 void	error(int code);
-int		input_checker(float a, float b, float c);
-void	input_provider(void);
+int		ft_atoi(char *str);
 
 #endif
