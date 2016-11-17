@@ -2,8 +2,8 @@
 #include <conio.h>
 #include <math.h>
 
-float x, x1, x2, dx, e, r, d, n;
-int eo, j, k;
+float x, xz, x1, x2, dx, e, r, d, n;
+int eo, j, k, y;
 
 void choosing (void)
 {
@@ -33,23 +33,18 @@ void enter (void)
 {
 	char c;
 
-	printf("\nChhose a function and enter beginning and ending of a range, step and accuracy.\n");
-	printf("Note: if ending is smaller than a beginning, enter negative step.\n");
+	printf("\nChoose a function and enter beginning and ending of a range, step and accuracy.\n");
+	printf("Note: if an ending is smaller than a beginning, enter negative step.\n");
 	printf("Results will be rounded to six decimal places.\n");
+
+	choosing();
 
 	do
 	{
 		printf("\nEnter beginning of a range\n");
-		if ((scanf("%f%c", &x1, &c)!=2)||(c!='\n'))
+		if ((scanf("%f%c", &x1, &c)!=2)||(c!='\n')||(x1>3.4e38)||(x1<(-3.4e38)))
 		{
-			printf("Enter only numbers.\n");
-			fflush(stdin);
-			j=0;
-		}
-		else (j=1);
-		if ((x1<=-1000)||(x1>=1000))
-			{
-			printf("Enter only numbers from -999 to 999\n");
+			printf("Enter only numbers from -3.4e38 to 3.4e38.\n");
 			fflush(stdin);
 			j=0;
 		}
@@ -60,22 +55,16 @@ void enter (void)
 	do
 	{
 		printf("\nEnter ending of a range\n");
-		if ((scanf("%f%c", &x2, &c)!=2)||(c!='\n'))
+		if ((scanf("%f%c", &x2, &c)!=2)||(c!='\n')||(x2>3.4e38)||(x2<(-3.4e38)))
 		{
-			printf("Enter only numbers.\n");
+			printf("Enter only numbers from -3.4e38 to 3.4e38.\n");
 			fflush(stdin);
 			j=0;
 		}
 		else (j=1);
 		if (x2==x1)
 		{
-			printf("EBeginning aand anding of a range must be different.\n");
-			fflush(stdin);
-			j=0;
-		}
-		if ((x2<=-1000)||(x2>=1000))
-			{
-			printf("Enter only numbers from -999 to 999\n");
+			printf("Beginning and ending of a range must be different.\n");
 			fflush(stdin);
 			j=0;
 		}
@@ -86,9 +75,9 @@ void enter (void)
 	do
 	{
 		printf("\nEnter step\n");
-		if ((scanf("%f%c", &dx, &c)!=2)||(c!='\n')||(dx==0))
+		if ((scanf("%f%c", &dx, &c)!=2)||(c!='\n')||(dx==0)||(dx>3.4e38)||(dx<(-3.4e38)))
 		{
-			printf("Enter only numbers without 0.\n");
+			printf("Enter only numbers from -3.4e38 to 3.4e38 without 0.\n");
 			fflush(stdin);
 			j=0;
 		}
@@ -121,26 +110,29 @@ void enter (void)
 	}
 	while (j!=1);
 
-	if (eo==0) {e=1;}
-	if (eo==1) {e=0.1;}
-	if (eo==2) {e=0.01;}
-	if (eo==3) {e=0.001;}
-	if (eo==4) {e=0.0001;}
-	if (eo==5) {e=0.00001;}
-	if (eo==6) {e=0.000001;}
+	switch(eo)
+	{
+		case 0: e=1; break;
+		case 1: e=0.1; break;
+		case 2: e=0.01; break;
+		case 3: e=0.001; break;
+		case 4: e=0.0001; break;
+		case 5: e=0.00001; break;
+		case 6: e=0.000001; break;
+	}
 }
 
 void showbs (void)
 {
 	printf("This is your result:\n");
-	printf("  _________________________________________\n");
-	printf("||     x     | T. sin  | S. sin  ||S. - T.|||\n");
-	printf("||-----------|---------|---------|---------||\n");
+	printf("  _______________________________________\n");
+	printf("||    x    | T. sin  | S. sin  ||S. - T.|||\n");
+	printf("||---------|---------|---------|---------||\n");
 }
 
 void showes (void)
 {
-	printf("||_________________________________________||\n");
+	printf("||_______________________________________||\n");
 	printf("x - your angle\n");
 	printf("T. sin - sinus, calculated using Tailor\'s method\n");
 	printf("S. sin - sinus, calculated using standart method\n");
@@ -150,14 +142,14 @@ void showes (void)
 void showbc (void)
 {
 	printf("This is your result:\n");
-	printf("  _________________________________________\n");
-	printf("||     x     | T. cos  | S. cos  ||S. - T.|||\n");
-	printf("||-----------|---------|---------|---------||\n");
+	printf("  _______________________________________\n");
+	printf("||    x    | T. cos  | S. cos  ||S. - T.|||\n");
+	printf("||---------|---------|---------|---------||\n");
 }
 
 void showec (void)
 {
-	printf("||_________________________________________||\n");
+	printf("||_______________________________________||\n");
 	printf("x - your angle\n");
 	printf("T. cos - cosinus, calculated using Tailor\'s method\n");
 	printf("S. cos - cosinus, calculated using standart method\n");
@@ -179,11 +171,14 @@ void sinus (void)
 	}
 	while (fabs(d)>=e);
 	sinx=sin(r);
-	printf("||%11.*f", eo, x);
+	printf("||%9g", xz);
 	printf("|%9.*f", eo, sx);
-	printf("|%9.*f", eo, sinx);
-	printf("|%9.*f||\n", eo, fabs(sinx-sx));
-	x=x+dx;
+	printf("|%9f", sinx);
+	printf("|%9f||\n", fabs(sinx-sx));
+	xz=xz+dx;
+	y=xz/360;
+	if ((xz>360)||(xz<-360)) {x=xz-360*y;}
+	else {x=xz;}
 }
 
 void cosinus (void)
@@ -201,31 +196,35 @@ void cosinus (void)
 	}
 	while (fabs(d)>=e);
 	cosx=cos(r);
-	printf("||%11.*f", eo, x);
+	printf("||%9g", xz);
 	printf("|%9.*f", eo, cx);
-	printf("|%9.*f", eo, cosx);
-	printf("|%9.*f||\n", eo, fabs(cosx-cx));
-	x=x+dx;
+	printf("|%9f", cosx);
+	printf("|%9f||\n", fabs(cosx-cx));
+	xz=xz+dx;
+	y=xz/360;
+	if ((xz>360)||(xz<-360)) {x=xz-360*y;}
+	else {x=xz;}
 }
 
 void calculations (void)
 {
-	choosing();
 	enter();
+	xz=x1;
+	y=xz/360;
+	if ((xz>360)||(xz<-360)) {x=xz-360*y;}
+	else {x=xz;}
 	if (k==1)
 	{
 		showbs();
 		if (x2>x1)
 		{
-			x=x1;
 			do {sinus();}
-			while (x<=x2);
+			while (xz<=x2);
 		}
 		if (x2<x1)
 		{
-			x=x1;
 			do {sinus();}
-			while (x>=x2);
+			while (xz>=x2);
 		}
 		showes();
 	}
@@ -234,15 +233,13 @@ void calculations (void)
 		showbc();
 		if (x2>x1)
 		{
-			x=x1;
 			do {cosinus();}
-			while (x<=x2);
+			while (xz<=x2);
 		}
 		if (x2<x1)
 		{
-			x=x1;
 			do {cosinus();}
-			while (x>=x2);
+			while (xz>=x2);
 		}
 		showec();
 	}
