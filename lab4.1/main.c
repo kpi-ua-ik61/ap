@@ -6,6 +6,7 @@
 #include "../lib/inputlib.h"
 
 float precision;
+int eps;
 
 float sinTeylor(float rad){
 	float delta = rad;
@@ -15,10 +16,14 @@ float sinTeylor(float rad){
 	do{
 		delta *= -1 * rad * rad / ((n + 1) * (n + 2));
 		sinus += delta;
-		//printf("%f\n", delta);
+		//printf("%f\n", sinus);
 		n+=2;
 	}
 	while(fabs(delta) >= precision);
+
+	sinus *= pow(10, 6-eps);
+	sinus /= pow(10, 6-eps);
+	//printf("%f\n", sinus);
 
 	return sinus;
 }
@@ -51,28 +56,38 @@ int code() {
 		printf("If x1 > x2 step should be step < 0\n");
 		return 0;
 	}
-	int eps = returnEps();
+	eps = returnEps();
 	
 	precision = returnPrecision(eps);
 	printf("precision: %f\n\n", precision);
 
-	printf("%*s   |   ", eps+6, "x");
-	printf("%*s   |   ", eps+4, "rad");
-	printf("%*s   ", eps+3, "sinT");
-	printf("%*s   ", 6+3, "sin");
-	printf("%*s   |   ", 6+3, "diff");
-	printf("%*s   ", eps+3, "cosT");
-	printf("%*s   ", 6+3, "cos");
-	printf("%*s\n", 6+3, "diff");
+	printf("%*s   |   ", 10, "x");
+	printf("%*s   |   ", 8, "rad");
+	printf("%*s   ", 8, "sinT");
+	printf("%*s   ", 8, "sin");
+	printf("%*s   |   ", 9, "diff");
+	printf("%*s   ", 8, "cosT");
+	printf("%*s   ", 8, "cos");
+	printf("%*s\n", 9, "diff");
 
 	// printf(" x         rad          sinT         sin         sinT-sin         cosT         cos         cosT-cos\n");
-	
+	int rowCounter = 0;
+	int pageCounter = 0;
+	int rowNumber = 0;
+	int pageNumber = 0;
 	if(step > 0) {
 		for (float x = x1; x <= x2; x += step){
-			printf("%*.*f   |   ", eps+6, 6, x);
+			rowNumber++;
+		}
+
+		if(rowNumber%15 == 0) pageNumber = rowNumber/15;
+		else if (rowNumber%15 > 0) pageNumber = rowNumber/15+1;
+
+		for (float x = x1; x <= x2; x += step){
+			printf("%*.*f   |   ", 10, 6, x);
 
 			float rad = x * M_PI / 180;
-			printf("%*.*f   |   ", eps+4, 6, rad);
+			printf("%*.*f   |   ", 8, 6, rad);
 
 			// printf("  %f\n", x);
 
@@ -81,32 +96,52 @@ int code() {
 			float sinus = sin(rad);
 			float cosin = cos(rad);
 
-			printf("%*.*f   ", eps+3, eps, sinT);
-			printf("%*.*f   ", 6+3, 6, sinus);
-			printf("%*.*f   |   ", 6+3, 6, sinT - sinus);
-			printf("%*.*f   ", eps+3, eps, cosT);
-			printf("%*.*f   ", 6+3, 6, cosin);
-			printf("%*.*f\n", 6+3, 6, cosT - cosin);
+			printf("%*.*f   ", 6, 6, sinT);
+			printf("%*.*f   ", 6, 6, sinus);
+			printf("%*.*f   |   ", 9, 6, sinus-sinT);
+			printf("%*.*f   ", 6, 6, cosT);
+			printf("%*.*f   ", 6, 6, cosin);
+			printf("%*.*f\n", 9, 6, cosin-cosT);
+
+			rowCounter++;
+
+			if(rowCounter % 15 == 0){
+				pageCounter++;
+				printf("Page %d/%d, press any key to continue...", pageCounter, pageNumber);
+				getch();
+				printf("\n");
+				if(rowCounter != rowNumber){
+					printf("%*s   |   ", 10, "x");
+					printf("%*s   |   ", 8, "rad");
+					printf("%*s   ", 8, "sinT");
+					printf("%*s   ", 8, "sin");
+					printf("%*s   |   ", 9, "diff");
+					printf("%*s   ", 8, "cosT");
+					printf("%*s   ", 8, "cos");
+					printf("%*s\n", 9, "diff");
+				}
+
+			}
 		}
 	}
-	else{
+	else {
 		for (float x = x1; x >= x2; x += step){
-			printf("%*.*f   |   ", eps+6, 6, x);
+			printf("%*.*f   |   ", 10, 6, x);
 
 			float rad = x * M_PI / 180;
-			printf("%*.*f   |   ", eps+4, 6, rad);
+			printf("%*.*f   |   ", 8, 6, rad);
 
 			float sinT = sinTeylor(rad);
 			float cosT = cosTeylor(rad);
 			float sinus = sin(rad);
 			float cosin = cos(rad);
 
-			printf("%*.*f   ", eps+3, eps, sinT);
-			printf("%*.*f   ", 6+3, 6, sinus);
-			printf("%*.*f   |   ", 6+3, 6, sinT - sinus);
-			printf("%*.*f   ", eps+3, eps, cosT);
-			printf("%*.*f   ", 6+3, 6, cosin);
-			printf("%*.*f\n", 6+3, 6, cosT - cosin);
+			printf("%*.*f   ", 6, 6, sinT);
+			printf("%*.*f   ", 6, 6, sinus);
+			printf("%*.*f   |   ", 9, 6, sinT - sinus);
+			printf("%*.*f   ", 6, 6, cosT);
+			printf("%*.*f   ", 6, 6, cosin);
+			printf("%*.*f\n", 9, 6, cosin - cosT);
 		}
 	}
 

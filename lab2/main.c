@@ -45,7 +45,7 @@ void bisector() {
 	printf("Bisector to the side\n -a: %f units\n -b: %f units\n -c: %f units\n\n", bisa, bisb, bisc);
 }
 
-main() {
+int main() {
 	printf("Enter a: ");
 	if(scanf("%f%c", &a, &term) != 2 || term != '\n'){         // перевірка введених даних через return scanf
 	    printf("Input error!\n");
@@ -83,5 +83,7 @@ main() {
 	bisector();
 
 	getch();
+
+	return 0;
 
 }

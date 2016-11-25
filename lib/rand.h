@@ -6,8 +6,8 @@ int randInit(){
 }
 
 int randInt(int min, int max){
-	int num = min + (rand() % max+1-min);
-	int sign = rand() % 2;
+	int num = min + (rand() % (max+1-min));
+	int sign = rand() % 2; 
 	if(min < 0 && sign) num *= -1;
 	return num;
 }

@@ -43,6 +43,29 @@ int returnInputInt(char* request){
 	return value;
 }
 
+int returnMinInputInt(char* request, int min){
+	int inpcheck = 0;
+	char term;
+	int value;
+
+	do{
+		printf("%s", request);
+		scanf("%d%c", &value, &term);
+
+		if ( term != '\n' || value < min) {
+			printf("Please enter an integer number not less than %d\n", min);
+			printf("Try again or press Ctrl+C to exit\n");
+			inpcheck = 0;
+			fflush(stdin);
+		}
+		else inpcheck = 1;
+
+	}
+	while (!inpcheck);
+
+	return value;
+}
+
 int inputFloat(float *value, char* request){
 	int inpcheck = 0;
 	char term;
