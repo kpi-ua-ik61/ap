@@ -103,7 +103,7 @@ int code() {
 				tsum[a] += syst[a][b];
 			}
 		}
-		if (fabs(syst[a][a]) <= fabs(tsum[a])) {
+		if (fabs(syst[a][a]) < fabs(tsum[a])) {
 			printf("Error: diagonal elements may not be bigger than sum of other elemens in a row.\n");
 			return 0;
 		}
