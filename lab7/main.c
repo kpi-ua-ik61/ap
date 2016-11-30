@@ -82,12 +82,6 @@ float newton(float b, float precision){
 
 int code() {
 
-	float a = returnInputFloat("Enter a: ");
-	float b = returnInputFloat("Enter b: ");
-	y = returnInputFloat("Enter y: ");
-	int eps = returnEps();
-	float precision = returnPrecision(eps);
-
 	// choose equation
 	printf("\n");
 
@@ -102,6 +96,17 @@ int code() {
 	if(fun == 49) fun = 1;
 	else if (fun == 50) fun = 2;
 	else return 0;
+
+	float a = returnInputFloat("Enter a: ");
+	float b = returnInputFloat("Enter b: ");
+	y = returnInputFloat("Enter y: ");
+	if(y == 0){
+		printf("Error, y cannot be = 0!\n");
+		return 0;
+	}
+	int eps = returnEps();
+	float precision = returnPrecision(eps);
+
 
 
 	char again;
