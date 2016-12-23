@@ -52,6 +52,11 @@ int code() {
 	float step = returnInputFloat("step: ");
 	if(step == 0){ printf("Step can't be 0!");}
 
+	if(x1 < x2 && step < 0){
+		printf("If x1 < x2 step should be step > 0\n");
+		return 0;
+	}
+
 	if(x1 > x2 && step > 0){
 		printf("If x1 > x2 step should be step < 0\n");
 		return 0;

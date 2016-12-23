@@ -109,6 +109,28 @@ float returnInputFloat(char* request){
 	return value;
 }
 
+float returnMinInputFloat(char* request, float min){
+	int inpcheck = 0;
+	char term;
+	float value;
+
+	do{
+		printf("%s", request);
+
+		scanf("%f%c", &value, &term);
+		if ( term != '\n') {        // || &value / &value != 1
+			printf("Please enter a float number more than %f\n", min);
+			printf("Try again or press Ctrl+C to exit\n\n");
+			inpcheck = 0;
+			fflush(stdin);
+		}
+		else inpcheck = 1;
+	}
+	while (!inpcheck);
+
+	return value;
+}
+
 int returnEps(){
 	int inpcheck = 0;
 	char term;
