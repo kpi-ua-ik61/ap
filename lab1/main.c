@@ -3,7 +3,6 @@
 
 char term;
 
-
 int roman(int i, int j, char c){
 	while (i >= j) {
 		putchar(c);
@@ -23,12 +22,7 @@ int main() {
 		return 0;
 	}
 
-
-
 	a = roman(a,1000,'M');
-
-
-
 	a = roman(a,500,'D');
 	a = roman(a,100,'C');
 	a = roman(a,50,'L');
@@ -36,11 +30,7 @@ int main() {
 	a = roman(a,5,'V');
 	a = roman(a,1,'I');
 
-
-
-
 	getch();
-
 	return 0;
 }
 

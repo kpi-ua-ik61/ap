@@ -41,13 +41,14 @@ int code() {
 			return 0;
 		}
 
-		printf("%*s   |   ", 10, "Fmin");
-		printf("%*s   |   ", 37, "Z");
-		printf("%*s   \n", 8, "f0");
+		float f = 1 / (2 * M_PI * sqrt(L * C));
+		printf("\nf0 = %14e\n\n", f);
+
+		printf("%*s   |   ", 10, "F");
+		printf("%*s   \n", 5, "Z");
 
 		if (Fmin < Fmax) {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
 				float w = 2 * M_PI * Fmin;
 
 				float a = L / C;
@@ -58,15 +59,14 @@ int code() {
 				Z.real =    (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 
 				Fmin += df;
 			} while(Fmin <= Fmax);
 		} else {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
+				
 				float w = 2 * M_PI * Fmin;
 
 				float a = L / C;
@@ -77,9 +77,8 @@ int code() {
 				Z.real =    (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 
 				Fmin += df;
 			} while(Fmin >= Fmax);
@@ -107,13 +106,14 @@ int code() {
 			return 0;
 		}
 
-		printf("%*s   |   ", 10, "Fmin");
-		printf("%*s   |   ", 37, "Z");
-		printf("%*s   \n", 8, "f0");
+		float f = 1 / (2 * M_PI * sqrt(L * C));
+		printf("\nf0 = %14e\n\n", f);
+
+		printf("%*s   |   ", 10, "F");
+		printf("%*s   \n", 5, "Z");
 
 		if (Fmin < Fmax) {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
 				float w = 2 * M_PI * Fmin;
 
 				float a = L / C;
@@ -124,15 +124,14 @@ int code() {
 				Z.real = (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 
 				Fmin += df;
-			} while(Fmin <= Fmax + df);
+			} while(Fmin <= Fmax);
 		} else {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
+				
 				float w = 2 * M_PI * Fmin;
 
 				float a = L / C;
@@ -143,9 +142,8 @@ int code() {
 				Z.real = (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 				
 				Fmin += df;
 			} while(Fmin >= Fmax);
@@ -174,13 +172,14 @@ int code() {
 			return 0;
 		}
 
-		printf("%*s   |   ", 10, "Fmin");
-		printf("%*s   |   ", 37, "Z");
-		printf("%*s   \n", 8, "f0");
+		float f = 1 / (2 * M_PI * sqrt(L * C));
+		printf("\nf0 = %14e\n\n", f);
+
+		printf("%*s   |   ", 10, "F");
+		printf("%*s   \n", 5, "Z");
 
 		if (Fmin < Fmax) {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
 				float w = 2 * M_PI * Fmin;
 
 				float a = R1 * R2;
@@ -191,15 +190,13 @@ int code() {
 				Z.real = (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 
 				Fmin += df;
 			} while(Fmin <= Fmax + df);
 		} else {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
 				float w = 2 * M_PI * Fmin;
 
 				float a = R1 * R2;
@@ -210,9 +207,8 @@ int code() {
 				Z.real = (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 
 				Fmin += df;
 			} while(Fmin >= Fmax);
@@ -241,13 +237,14 @@ int code() {
 			return 0;
 		}
 
-		printf("%*s   |   ", 10, "Fmin");
-		printf("%*s   |   ", 37, "Z");
-		printf("%*s   \n", 8, "f0");
+		float f = 1 / (2 * M_PI * sqrt(L * C));
+		printf("\nf0 = %14e\n\n", f);
+
+		printf("%*s   |   ", 10, "F");
+		printf("%*s   \n", 5, "Z");
 
 		if (Fmin < Fmax) {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
 				float w = 2 * M_PI * Fmin;
 
 				float a = R1 * R2 + L / C;
@@ -258,15 +255,13 @@ int code() {
 				Z.real = (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 
 				Fmin += df;
 			} while(Fmin <= Fmax + df);
 		} else {
 			do {
-				float f = 1 / (2 * M_PI * sqrt(L * C));
 				float w = 2 * M_PI * Fmin;
 
 				float a = R1 * R2 + L / C;
@@ -277,9 +272,8 @@ int code() {
 				Z.real = (a * c + b * d) / (c * c + d * d);
 				Z.imaginary = (b * c - a * d) / (c * c + d * d);
 
-				printf("%*f   |   ", 10, Fmin);
-				printf("%14e + i * (%14e)   |   ", Z.real, Z.imaginary);
-				printf("%14e\n", f);
+				printf("%*g   |   ", 10, Fmin);
+				printf("%14e + i * (%14e)   \n", Z.real, Z.imaginary);
 				
 				Fmin += df;
 			} while(Fmin >= Fmax);
