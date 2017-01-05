@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "../lib/inputlib.h"
-#include "../lib/rand.h"
+// #include "../lib/rand.h"
 
 #define BLACK 	"\033[0;30m"
 #define RED 	"\033[0;31m"
@@ -72,6 +72,8 @@ struct record{
 	double b;
 };
 
+
+
 int check_empty() {
 	fseek(fp, 0L, SEEK_END);
 	if(ftell(fp) == 0) return 1;
@@ -113,19 +115,19 @@ int create_file() {
 	fflush(stdin);
 	
 	if ((fp=fopen(filename, "rb")) != NULL) {
-		printf(LRED"Error"NC " Such file already exists!\n");
+		printf(LRED"Error"NC " Maybe such file already exists!\n");
 		getch();
 		return 0;
 	}
 
 	if ((fp=fopen(filename, "wb")) == NULL) {
-		printf(LRED"Error"NC " Unable to create file! Such file already exists!\n");
+		printf(LRED"Error"NC " Unable to create file! Maybe such file already exists!\n");
 		getch();     // exit(0);
 		return 0;
 	}
 
 	if ((fp=fopen(filename, "r+wb")) == NULL) {
-		printf(LRED"Error"NC " Unable to create file! Such file already exists!\n");
+		printf(LRED"Error"NC " Unable to create file! Maybe such file already exists!\n");
 		getch();
 		return 0;
 	}
@@ -154,7 +156,7 @@ int open_file() {
 	fflush(stdin);
 
 	if ((fp=fopen(filename, "r+wb")) == NULL) {
-		printf(LRED"Error"NC " Unable to open file! File does not exist!\n");
+		printf(LRED"Error"NC " Unable to open file! Maybe file does not exist!\n");
 		getch();     // exit(0);
 		return 0;
 	}
@@ -174,7 +176,7 @@ int remove_file() {
 
 	if (remove(filename))
 	{
-		printf(LRED"Error"NC " Unable to delete file! Such file doesn't exists!\n");
+		printf(LRED"Error"NC " Unable to delete file! Maybe such file doesn't exists!\n");
 		getch();
 		return 0;
 	}
@@ -196,17 +198,29 @@ int close_file() {
 }
 
 
+
 int create_record() {
 	char new[100];
 
 	fseek(fp, 0L, SEEK_END);
 
 	printf("Enter string: ");
-	scanf(" %s", new);
+	
+	fflush(stdin);
+	fgets (new, 100, stdin);
+
+	if ((strlen(new)>0) && (new[strlen (new) - 1] == '\n'))
+		new[strlen (new) - 1] = '\0';
+
+	fflush(stdin);
+
+
 	struct record *tmp = malloc(sizeof(struct record));
+
 	strcpy(tmp->data, new);
 	tmp->a = returnInputDouble("Enter double 1: ");
 	tmp->b = returnInputDouble("Enter double 2: ");
+
 	fwrite(tmp, sizeof(struct record), 1, fp);
 
 	printf(LGREEN"Record created!\n"NC);
@@ -259,7 +273,14 @@ int edit_record() {
 	printf("| %s 	| %f 	| %f 	|\n", tmp->data, tmp->a, tmp->b);
 
 	printf("Enter new string: ");
-	scanf(" %s", new);
+
+	fgets (new, 100, stdin);
+
+	if ((strlen(new)>0) && (new[strlen (new) - 1] == '\n'))
+		new[strlen (new) - 1] = '\0';
+	
+	fflush(stdin);
+
 	strcpy(tmp->data, new);
 	tmp->a = returnInputDouble("Enter new double 1: ");
 	tmp->b = returnInputDouble("Enter new double 2: ");
@@ -367,7 +388,14 @@ int insert_record() {
 	num = returnMinMaxInputInt("Enter where to insert: ", 1, ent_count);
 
 	printf("Enter string: ");
-	scanf(" %s", new);
+
+	fgets (new, 100, stdin);
+
+	if ((strlen(new)>0) && (new[strlen (new) - 1] == '\n'))
+		new[strlen (new) - 1] = '\0';
+	
+	fflush(stdin);
+	
 	struct record *tmp = malloc(sizeof(struct record));
 	strcpy(tmp->data, new);
 	tmp->a = returnInputDouble("Enter double 1: ");
@@ -431,6 +459,8 @@ int delete_record() {
 	return 0;
 }
 
+
+
 int file_menu(){
 	system("cls");
 
@@ -448,22 +478,26 @@ int file_menu(){
 
 	do{
 		printf("\nType option: ");
-		int option;
-		scanf("%d", &option);
+		char option;
+		scanf("%c", &option);
 
 		switch(option){
-			case 1:	create_file();
-					check = 0;
-					break;
-			case 2:	open_file();
-					check = 0;
-					break;
-			case 3:	remove_file();
-					check = 0;
-					break;
-			case 0:	exit(0);
-					check = 0;
-					break;
+			case '1':	create_file();
+						check = 0;
+						break;
+
+			case '2':	open_file();
+						check = 0;
+						break;
+
+			case '3':	remove_file();
+						check = 0;
+						break;
+
+			case '0':	exit(0);
+						check = 0;
+						break;
+
 			default: printf(LRED"\nInvalid option!\n"NC);
 		}
 		fflush(stdin);
@@ -500,60 +534,73 @@ int edit_menu(){
 
 	do{
 		printf("\nType option: ");
-		int option;
-		scanf("%d", &option);
+		char option;
+		scanf("%c", &option);
 
 		if(check_empty()) {
 			switch(option){
-				case 1:	create_record();
-						check = 0;
-						break;
-				case 2:	break;
-				case 3:	break;
-				case 4:	break;
-				case 5:	break;
-				case 6:	break;
-				case 7:	break;
-				case 9:	close_file();
-						check = 0;
-						break;
-				case 0:	close_file();
-						exit(0);
-						check = 0;
-						break;
+				case '1':	create_record();
+							check = 0;
+							break;
+
+				case '2':	break;
+				case '3':	break;
+				case '4':	break;
+				case '5':	break;
+				case '6':	break;
+				case '7':	break;
+
+				case '9':	close_file();
+							check = 0;
+							break;
+
+				case '0':	close_file();
+							exit(0);
+							check = 0;
+							break;
+
 				default: printf(LRED"\nInvalid option!\n"NC);
 			}
 		}
 		else {
 			switch(option){
-				case 1:	create_record();
-						check = 0;
-						break;
-				case 2:	read_record();
-						check = 0;
-						break;
-				case 3:	read_file();
-						check = 0;
-						break;
-				case 4:	edit_record();
-						check = 0;
-						break;
-				case 5:	sort_record();
-						check = 0;
-						break;
-				case 6:	insert_record();
-						check = 0;
-						break;
-				case 7:	delete_record();
-						check = 0;
-						break;
-				case 9:	close_file();
-						check = 0;
-						break;
-				case 0:	close_file();
-						exit(0);
-						check = 0;
-						break;
+				case '1':	create_record();
+							check = 0;
+							break;
+
+				case '2':	read_record();
+							check = 0;
+							break;
+
+				case '3':	read_file();
+							check = 0;
+							break;
+
+				case '4':	edit_record();
+							check = 0;
+							break;
+
+				case '5':	sort_record();
+							check = 0;
+							break;
+
+				case '6':	insert_record();
+							check = 0;
+							break;
+
+				case '7':	delete_record();
+							check = 0;
+							break;
+
+				case '9':	close_file();
+							check = 0;
+							break;
+
+				case '0':	close_file();
+							exit(0);
+							check = 0;
+							break;
+
 				default: printf(LRED"\nInvalid option!\n"NC);
 			}
 		}
@@ -563,6 +610,8 @@ int edit_menu(){
 
 	return 0;
 }
+
+
 
 int main() {
 
