@@ -22,3 +22,8 @@ float randFloat(/*float min, float max*/){
 
 	return num;
 }
+
+float randPosFloat(){
+	float num = ((float)rand()/(float)(RAND_MAX)) * 100;
+	return num;
+}

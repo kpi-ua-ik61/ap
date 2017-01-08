@@ -195,8 +195,8 @@ float returnInputDouble(char* request){
 		printf("%s", request);
 
 		scanf("%f%c", &value, &term);
-		if ( term != '\n' || value > 1e37 || value < -1e37) {        // || &value / &value != 1
-			printf("Please enter a float number < 1e+37 & > -1e37\n");
+		if ( term != '\n' || value > 1e37 || value < 0) {        // || &value / &value != 1
+			printf("Please enter a float number 0 < x < 1e37\n");
 			printf("Try again or press Ctrl+C to exit\n\n");
 			inpcheck = 0;
 			fflush(stdin);
