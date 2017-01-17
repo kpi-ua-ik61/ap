@@ -1,14 +1,14 @@
-#include <curses.h>
+#include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h> //Нити, они повсюду
 #include <string.h>
 #include <math.h>
 
-void errMsg(char* errorMsg){ //Мой любимый, мой родной, вызов сообщения об ошибке
-	printf("\nERROR\n %s\n\n Press any key to continue or ESC to exit.\n");
+void errMsg(char *errorMsg){ //Мой любимый, мой родной, вызов сообщения об ошибке
+	printf("\nERROR\n %s\n Programm will try again, if you wish give up, press Ctrl C\n\n", errorMsg);
 }
 void line(){
-	printf("-------------------------------------------------------");
+	printf("--------------------------------------------------------------------");
 }
 void linemenu(){
 	printf("\n|Degrees| Sin(x) - (Teylor) | Sin(X) - (Build-in) | Accuracy |\n");
@@ -29,14 +29,16 @@ float sint(float i, float e){
 }
 int main()
 {
-	char lim1[10], lim2[10], lim3[10], step[10], accur[10];
+	char lim1[30], lim2[30], lim3[30], step[10], accur[10];
 	float x1, x2, e1, x, i, sintx, costx;
 	double e, dx, h, g;
-	int buf, buf1, a, hh, hd;
+	int buf, buf1, a, hh, hd, looper;
 	char *error;
-	char escape;
+	int escape;
 
-	while (escape != 27){
+	while (looper != 1){
+		printf("\nProgramm for computing sin(x)\n")
+		fflush(stdin);
 		printf("\nEnter the limit 1: ");
 		scanf("%s", lim1);
 		x1 = strtod(lim1, &error); //Чек на символы
@@ -94,8 +96,7 @@ int main()
 					for(i = x1; i <= x2; i=i + fabs(dx)){
 						buf1++;
 						if (buf1%11==0){
-							printf("\nThere is 10 values. Enter any key to show another. \n\n");
-							getch();
+							printf("\nThere is more than 10 values. \n\n");
 		line();
 		linemenu();
 		line();
@@ -104,7 +105,7 @@ int main()
 		printf("\n|%5.2f  |%15.9f  |%18.9f  |%9.4e|\n", i, sintx, sin(i * M_PI / 180), fabs(sintx - sin(i * M_PI / 180)));
 		line();
 					}
-					printf("\nPress any key to continue or ESC to exit. \n");
+					printf("\nProgramm will try again, if you wish give up, press Ctrl C \n");
 				}
 				else{
 					errMsg("Such step doesnt correspond to limits");
@@ -120,7 +121,7 @@ int main()
 						buf1++;
 						if (buf1%10==0){
 							printf("\nThere is 10 values. Enter any key to show another. \n\n");
-							getch();
+							getchar();
 		line();
 		linemenu();
 		line();
@@ -129,17 +130,13 @@ int main()
 		printf("\n|%6.2f  |%15.9f  |%18.9f  |%1.11f|\n", i, sintx, sin(i * M_PI / 180), fabs(sintx - sin(i * M_PI / 180)));
 		line();
 					}
-					printf("\n Press any key to continue or ESC to exit.\n");
+					printf("\nProgramm will try again, if you wish give up, press Ctrl C\n");
 				}
 				else{
 					errMsg("Such step doesnt correspond to limits");
 				}
 			}
 		}
-		if(getch() == 27){
-			break;
-		}
+		printf("\nAnd now moving to the beggining")
 	}
-	exit(0);
-	
 }
